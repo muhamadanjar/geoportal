@@ -16,6 +16,7 @@ interface MapProps {
 const isBrowser = typeof window !== "undefined";
 
 const MapComponent = ({ children }: MapProps) => {
+	console.log("isBrowser", isBrowser);
 	const mapRef = useRef<Map|null>();
 	const mapElement = useRef<HTMLDivElement>(null);
 
@@ -64,7 +65,7 @@ const MapComponent = ({ children }: MapProps) => {
 	}, [mapElement]);
 
 	return isBrowser ? (
-		<div ref={mapElement} className="h-[90vh] w-full">
+		<div ref={mapElement} className="h-[90vh] w-full map">
 			{children}
 		</div>) : null
 	

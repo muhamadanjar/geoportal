@@ -1,9 +1,10 @@
-import MapComponent from "@/components/map-component";
-import {Map} from "ol"
+import dynamic from "next/dynamic";
+const MapComponentNoSSR = dynamic(() => import('@/components/map/map-component'), { ssr: false })
+
 const MapPage = () => {
 	return ( 
 		<>
-			<MapComponent/>
+			<MapComponentNoSSR/>
 		</>
 	 );
 }

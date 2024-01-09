@@ -1,4 +1,3 @@
-/* eslint-disable import/no-anonymous-default-export */
 import { SearchParamOptions } from '@/types';
 import type { AxiosResponse } from 'axios';
 import axios from 'axios';
