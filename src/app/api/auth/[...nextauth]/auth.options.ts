@@ -44,23 +44,37 @@ export const authOptions: NextAuthOptions = {
 		CredentialsProvider({
 			id: 'credentials',
 			name: 'Credentials',
-			credentials: {},
+			credentials: {
+				username: {
+					label: "username:",
+					type: "text",
+					placeholder: "username",
+				},
+				password: {
+					label: "password:",
+					type: "password",
+					placeholder: "your-password",
+				},
+			},
 			async authorize(credentials: any) {
-				// You need to provide your own logic here that takes the credentials
-				// submitted and returns either a object representing a user or value
-				// that is false/null if the credentials are invalid
-				const user = {
-					username: 'admin@admin.com',
-					password: 'admin',
-				};
+				console.log(credentials);
+				try{
+					const user = {
+						username: 'admin',
+						password: 'admin',
+					};
 
-				if (
-					isEqual(user, {
-						username: credentials?.username,
-						password: credentials?.password,
-					})
-				) {
-					return user as any;
+					if (
+						isEqual(user, {
+							username: credentials?.username,
+							password: credentials?.password,
+						})
+					) {
+						return user as any;
+					}
+
+				} catch (error){
+					console.error(error);
 				}
 				return null;
 			},
