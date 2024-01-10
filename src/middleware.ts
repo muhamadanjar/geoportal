@@ -16,12 +16,12 @@ function matchesWildcard(path: string, pattern: string): boolean {
 
 
 export async function middleware(request: NextRequest) {
-	// const LOGIN = `${process.env.NEXT_PUBLIC_BASE_URL}/login?redirect=${request.nextUrl.pathname + request.nextUrl.search}`;
+	const LOGIN = `${process.env.NEXT_PUBLIC_BASE_URL}/login?redirect=${request.nextUrl.pathname + request.nextUrl.search}`;
 	// if (authRoutes.some(pattern => matchesWildcard(request.nextUrl.pathname, pattern))) {
 	// 	const token = request.cookies.get('token');
 	// 	// For API routes, we want to return unauthorized instead of
 	// 	// redirecting to login
-	// 	if (request.nextUrl.pathname.startsWith('/api')) {
+		if (request.nextUrl.pathname.startsWith('/api')) {
 	// 		if (!token) {
 	// 			const response: ApiResponse = {
 	// 				status: 403,
@@ -29,7 +29,7 @@ export async function middleware(request: NextRequest) {
 	// 			};
 	// 			return NextResponse.json(response, { status: 401 });
 	// 		}
-	// 	}
+		}
 	// 	// If no token exists, redirect to login
 	// 	if (!token) {
 	// 		return NextResponse.redirect(LOGIN);
@@ -55,7 +55,7 @@ export async function middleware(request: NextRequest) {
 	// 	}
 	// }
 
-	// let redirectToApp = false;
+	let redirectToApp = false;
 	// Redirect login to app if already logged in
 	// if (request.nextUrl.pathname === '/signin') {
 	// 	const token = request.cookies.get('token');
@@ -74,12 +74,12 @@ export async function middleware(request: NextRequest) {
 	// 		}
 	// 	}
 	// }
-	// if (redirectToApp) {
+	if (redirectToApp) {
 		// Redirect to app dashboard
-		// return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}`);
-	// } else {
+		return NextResponse.redirect(`${process.env.NEXT_PUBLIC_BASE_URL}`);
+	} else {
 		// Return the original response unaltered
 		return NextResponse.next();
-	// }
+	}
 
 }
