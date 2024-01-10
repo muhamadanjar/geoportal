@@ -32,3 +32,20 @@ export interface SearchParamOptions {
 
 	[key: string]: unknown;
 }
+
+
+export interface User {
+	id: string;
+	name: string;
+	email: string;
+	wallet: {
+		total_points: number;
+		points_used: number;
+		available_points: number;
+	};
+	profile: {
+		id?: string;
+		contact?: string;
+		bio?: string;
+	};
+}

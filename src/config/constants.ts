@@ -9,6 +9,7 @@ export const ACCEPTED_FILE_TYPES = {
 	'.psd': [],
 };
 
+export const AUTH_TOKEN_KEY = "TOKEN";
 
 export const LIMIT = 10;
 export const SUPER_ADMIN = 'superadmin';
