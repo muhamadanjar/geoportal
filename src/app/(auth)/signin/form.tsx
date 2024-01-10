@@ -6,9 +6,8 @@ import { signIn } from "next-auth/react"
 import { useRouter } from 'next/navigation';
 import * as Yup from 'yup';
 import { yupResolver } from "@hookform/resolvers/yup"
-import Input from "@/components/ui/forms/input";
-import EyeIcon from "@/components/icons/eye";
-import EyeSlashIcon from "@/components/icons/eye-slash";
+
+
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
   password: Yup.string().required("Password is Required")
@@ -42,6 +41,7 @@ const SignInForm = () => {
 		});
 			console.log(res);
 		if (res?.error){
+			console.log("error", res.error)
 		}else{
 
 		}
