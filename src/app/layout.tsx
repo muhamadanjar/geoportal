@@ -5,6 +5,9 @@ import { QueryProvider } from "@/utils/query-providers";
 import AuthProvider from "@/utils/auth-providers";
 import { getServerSession } from "next-auth";
 import { authOptions } from "./api/auth/[...nextauth]/auth.options";
+import ModalContainer from "@/components/ui/modal";
+import DrawersContainer from "@/components/ui/drawer";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +26,13 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
       <AuthProvider session={session}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          {children}
+          <Suspense fallback={null}>
+            <DrawersContainer/>
+            <ModalContainer/>  
+          </Suspense>
+        </QueryProvider>
       </AuthProvider>
       </body>
     </html>
