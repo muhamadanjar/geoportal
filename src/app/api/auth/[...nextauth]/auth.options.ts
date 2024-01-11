@@ -1,5 +1,6 @@
 import type { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
+import GoogleProvider from 'next-auth/providers/google';
 import { pagesOptions } from './page.options';
 import isEqual from 'lodash/isEqual';
 
@@ -41,6 +42,10 @@ export const authOptions: NextAuthOptions = {
 		},
 	},
 	providers: [
+		GoogleProvider({
+			clientId: process.env.GOOGLE_CLIENT_ID || '',
+			clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
+		}),
 		CredentialsProvider({
 			id: 'credentials',
 			name: 'Credentials',
