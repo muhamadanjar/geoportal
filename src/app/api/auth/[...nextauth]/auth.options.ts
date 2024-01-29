@@ -3,6 +3,8 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { pagesOptions } from './page.options';
 import isEqual from 'lodash/isEqual';
+import axios from 'axios';
+import { NextResponse } from 'next/server';
 
 export const authOptions: NextAuthOptions = {
 	// debug: true,
@@ -31,6 +33,7 @@ export const authOptions: NextAuthOptions = {
 			return token;
 		},
 		async redirect({ url, baseUrl }) {
+			console.log("call redirect next auth");
 			const parsedUrl = new URL(url, baseUrl);
 			if (parsedUrl.searchParams.has('callbackUrl')) {
 				return `${baseUrl}${parsedUrl.searchParams.get('callbackUrl')}`;
@@ -62,21 +65,17 @@ export const authOptions: NextAuthOptions = {
 				},
 			},
 			async authorize(credentials: any) {
-				console.log(credentials);
+				console.log("credential data", credentials);
 				try{
-					const user = {
-						username: 'admin',
-						password: 'admin',
-					};
+					let res = await axios.post(`${process.env.NEXTAUTH_URL}/api/token/`, {
+						username: credentials.username,
+						password: credentials.password,
+					});
+					
+					console.log(res.data);
+					const response = NextResponse.next();
 
-					if (
-						isEqual(user, {
-							username: credentials?.username,
-							password: credentials?.password,
-						})
-					) {
-						return user as any;
-					}
+					response.cookies.set("token", res.data.access);
 
 				} catch (error){
 					console.error(error);
