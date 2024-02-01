@@ -46,19 +46,23 @@ const SignInForm = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-8">
-          <label>username</label>
+          <label className="text-black font-medium">Username</label>
+          <div className="mt-1">
           <input
-            className="py-3 px-2 rounded text-black"
+            className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
             {...register("username")}
           />
+          </div>
         </div>
         <div className="mb-8">
-          <label>Password</label>
+          <label className="text-black font-medium">Password</label>
+          <div className="mt-1">
           <input
-            className=" py-3 px-2 rounded text-black"
+            className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
             type="password"
             {...register("password")}
           />
+          </div>
         </div>
 
         <button
