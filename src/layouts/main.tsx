@@ -1,6 +1,6 @@
 import Header from "@/components/ui/header";
 
-import cn from "clsx";
+import cn from "@/utils/class-names";
 
 export default function MainLayout({ children, contentClassName}: React.PropsWithChildren<{ contentClassName?: string }>){
 	return (

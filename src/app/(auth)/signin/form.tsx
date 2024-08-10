@@ -1,11 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { Button } from "@headlessui/react";
+
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import cn from "@/utils/class-names";
+import { disable } from "ol/rotationconstraint";
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required("Username is required"),
@@ -32,46 +36,59 @@ const SignInForm = () => {
       password: data.password,
     });
     console.log("onsubmit signin",data, res);
+    setState(true);
     // if (res?.error) {
     //   console.log("error", res.error);
     // } else {
     // }
     // if (res?.url) router.push("/");
+
+    setTimeout(() => {
+      setState(false);
+    }, 5000);
   };
 
   return (
     <>
       <form
-        className="grid grid-cols-1 gap-4"
+        className="grid grid-cols-1 gap-4 w-full"
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="mb-8">
           <label className="text-black font-medium">Username</label>
           <div className="mt-1">
-          <input
-            className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
-            {...register("username")}
-          />
+            <input
+              className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
+              {...register("username")}
+            />
           </div>
         </div>
         <div className="mb-8">
           <label className="text-black font-medium">Password</label>
           <div className="mt-1">
-          <input
-            className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
-            type="password"
-            {...register("password")}
-          />
+            <input
+              className="w-full p-4 pr-12 text-sm border-gray-500 rounded-lg shadow-sm"
+              type="password"
+              {...register("password")}
+            />
           </div>
         </div>
 
-        <button
-          className="py-3 px-2 bg-blue-100 rounded"
-          type="submit"
-          value={"Login"}
-        >
-          Login
-        </button>
+        <Button as={Fragment} type="submit" disabled={state}>
+          {({ hover, active, disabled }) => (
+            <button
+              className={cn(
+                "rounded py-3 px-2 text-sm text-white",
+                !hover && !active && "bg-sky-600",
+                hover && !active && "bg-sky-500",
+                active && "bg-sky-700",
+                disabled && "bg-gray-500 cursor-not-allowed"
+              )}
+            >
+              Login
+            </button>
+          )}
+        </Button>
       </form>
     </>
   );

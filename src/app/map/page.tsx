@@ -1,4 +1,4 @@
-import MainLayout from "@/layouts/main";
+import MainLayout from "@/layouts/base";
 import dynamic from "next/dynamic";
 import getQueryClient from "@/utils/query.client";
 import {dehydrate, HydrationBoundary} from "@tanstack/react-query"
@@ -10,6 +10,9 @@ const MapPage = async () => {
 	console.log("session", session);
 	const queryClient = getQueryClient()
 	const dehydrateState = dehydrate(queryClient);
+
+	
+
 	return ( 
 		<>
 			<MainLayout>

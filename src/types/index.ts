@@ -50,3 +50,14 @@ export interface Role {
 	id: string;
 	name: string;
 }
+
+export interface Layer {
+	code: string;
+	name: string;
+	type?: string;
+	url: string;
+	styles?: string;
+	is_active?: boolean;
+	is_visible?: boolean;
+	opacity?: number;
+}
