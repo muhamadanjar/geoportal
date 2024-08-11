@@ -109,11 +109,11 @@ const MapComponent = ({ children, layers }: MapProps) => {
         // }
 
     }
+	createMap();
 
 	// Initial Map
 	useEffect(()=>{
 		console.log(mapRef, mapElement)
-		createMap();
 		// Handle Prevent Context Menu
 		mapElement.current?.addEventListener("contextmenu", (e) => e.preventDefault() );
 
@@ -151,9 +151,6 @@ const MapComponent = ({ children, layers }: MapProps) => {
 				</div>
 			</div>
 		</Container>
-		<MapToolbar>
-			
-		</MapToolbar>
 		</>
 		) : null
 	
