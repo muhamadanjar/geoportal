@@ -11,11 +11,11 @@ import {MapBrowserEvent} from "ol";
 import {transform} from "ol/proj"
 import "ol/ol.css";
 import { Layer } from "@/types";
-import Label from "@/components/ui/label";
-import SwitchComponent from "@/components/ui/switch";
-import Divider from "@/components/ui/divider";
-import Container from "@/components/ui/container";
+import {Label} from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
 import MapToolbar from "./map.toolbar";
+import { DivideSquare } from "lucide-react";
+import { Separator } from "../ui/separator";
 
 
 interface MapProps {
@@ -128,31 +128,31 @@ const MapComponent = ({ children, layers }: MapProps) => {
 	}, [])
 
 	return isBrowser ? (
-		<>
-		<div ref={mapElement} className="h-[90vh] w-full map">
-			{children}
-		</div>
-		<Container className="absolute w-1/4 bottom-4 left-5 overflow-y-auto overflow-x-hidden">
-			<div className="w-full px-2 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
-				<h3 className="text-center text-xl font-semibold">Layer TOC</h3>
-				<Divider className="mb-5"/>
-				<div className="overflow-y-scroll h-[200px]">
-					{layers?.map((item) => (
-
-						<div key={item.code} className="flex justify-between mb-2">
-							<Label>{item.name}</Label>
-							<div className="h-5">
-
-								<SwitchComponent onChange={(value) => onChangeLayer(item, value)}
-													checked={item.is_visible}/>
-							</div>
-						</div>
-					))}
-				</div>
-			</div>
-		</Container>
-		</>
-		) : null
+    <>
+      <div ref={mapElement} className="h-[90vh] w-full map">
+        {children}
+      </div>
+      <div className="absolute w-1/4 bottom-4 left-5 overflow-y-auto overflow-x-hidden">
+        <div className="w-full px-2 py-4 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
+          <h3 className="text-center text-xl font-semibold">Layer TOC</h3>
+          <Separator className="mb-5" />
+          <div className="overflow-y-scroll h-[200px]">
+            {layers?.map((item) => (
+              <div key={item.code} className="flex justify-between mb-2">
+                <Label>{item.name}</Label>
+                <div className="h-5">
+                  <Switch
+                    onCheckedChange={(value) => onChangeLayer(item, value)}
+                    checked={item.is_visible}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </>
+  ) : null;
 	
 }
  

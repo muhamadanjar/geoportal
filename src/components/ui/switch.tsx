@@ -1,35 +1,29 @@
-import { Switch } from "@headlessui/react";
+"use client"
 
-interface SwitchProps {
-  srText?: string;
-  checked?: boolean;
-  onChange?: (value: boolean) => void;
-}
+import * as React from "react"
+import * as SwitchPrimitives from "@radix-ui/react-switch"
 
-const SwitchComponent: React.FC<SwitchProps> = (
-  { srText = "toggle", checked = false, onChange },
-  ref
-) => {
-  return (
-    <>
-      <Switch
-        checked={checked}
-        onChange={onChange!}
-		    type="button"
-        className={`${
-          checked ? "bg-primary" : "bg-yellow-200"
-        } relative inline-flex flex-shrink-0 h-6 lg:h-7 w-10 lg:w-12 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75 focus:border-gray-300`}
-      >
-        <span className="sr-only">{srText}</span>
-        <span
-          className={`${
-            checked ? "translate-x-4 lg:translate-x-5" : "translate-x-0"
-          }
-            pointer-events-none inline-block h-5 lg:h-6 w-5 lg:w-6 rounded-full bg-teal-800 shadow-switch transform ring-0 transition ease-in-out duration-200`}
-        />
-      </Switch>
-    </>
-  );
-};
+import { cn } from "@/utils"
 
-export default SwitchComponent;
+const Switch = React.forwardRef<
+  React.ElementRef<typeof SwitchPrimitives.Root>,
+  React.ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>
+>(({ className, ...props }, ref) => (
+  <SwitchPrimitives.Root
+    className={cn(
+      "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input",
+      className
+    )}
+    {...props}
+    ref={ref}
+  >
+    <SwitchPrimitives.Thumb
+      className={cn(
+        "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0"
+      )}
+    />
+  </SwitchPrimitives.Root>
+))
+Switch.displayName = SwitchPrimitives.Root.displayName
+
+export { Switch }
