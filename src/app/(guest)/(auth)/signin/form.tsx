@@ -4,11 +4,11 @@ import { Fragment, useState } from "react";
 import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { Button } from "@headlessui/react";
+import { Button } from "@/components/ui/button";
 
 import * as Yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import cn from "@/utils/class-names";
+import {cn} from "@/utils";
 import { disable } from "ol/rotationconstraint";
 
 const validationSchema = Yup.object().shape({
@@ -74,20 +74,12 @@ const SignInForm = () => {
           </div>
         </div>
 
-        <Button as={Fragment} type="submit" disabled={state}>
-          {({ hover, active, disabled }) => (
-            <button
-              className={cn(
-                "rounded py-3 px-2 text-sm text-white",
-                !hover && !active && "bg-sky-600",
-                hover && !active && "bg-sky-500",
-                active && "bg-sky-700",
-                disabled && "bg-gray-500 cursor-not-allowed"
-              )}
+       
+        <Button asChild>
+           <button
             >
               Login
             </button>
-          )}
         </Button>
       </form>
     </>
